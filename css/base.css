@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.12.1/font/bootstrap-icons.min.css");
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+body{ 
+    background-color: var(--quase-branco);
+    color:var(--preto);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+footer{
+    background-color: var(--cor-pessego);
+    color:var(--clarinho);
+    text-align: center;
+    padding: 15px;
+    margin-top: 0px;
+    
+}
+footer .r-linha{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+  /* rodapé */
+  .icons-lala {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+.icons-lala a {
+    background-color: var(--cor-branco);
+    color: var(--cor-pessego);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+.icons-lala a:hover {
+    background-color:  rgb(219, 157, 163);
+    color:var(--cor-branco)
+}
+@media screen and (max-width:600px){
+    footer a{
+    width: 40px;
+    height: 40px;
+    font-size: 25px;
+    }
+  }
+  
+  .bloco-fundo-vitaminas {
+    background: url("/Empreendorismo-jeovana3b/images/fundotexto.png") no-repeat center center;
+    background-size: cover;
+    padding: 170px 0;
+}
+.conteudo-vitaminas {
+    text-align: center;
+}
+.titulo-vitaminas {
+    color: var(--cor-pessego);
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+.subtitulo-vitaminas {
+    color: var(--cor-pessego);
+    font-weight: normal;
+    font-size: 1.2rem;
+}
