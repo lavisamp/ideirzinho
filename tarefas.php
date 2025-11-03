@@ -1,67 +1,40 @@
-<?php
-$tarefa = new Tarefa();
-
-// filtro via GET: all / concluidas / pendentes
-$filter = $_GET['filter'] ?? 'all';
-$filterParam = null;
-if ($filter === 'concluidas') $filterParam = 'concluidas';
-if ($filter === 'pendentes') $filterParam = 'pendentes';
-
-$lista = $tarefa->listByUser($user_id, $filterParam);
-?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="CSS/baseSite.css" />
+  <link rel="shortcut icon" href="images/logo.png" type="image/x-icon" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
   <title>Minhas Tarefas</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="CSS/baseSite.css">
 </head>
+
 <body>
-<?php require_once "_parts/_menu2.php"; ?>
+  <?php require_once "_parts/_menu2.php"; ?>
 
-<main class="container mt-4">
-  <div class="d-flex justify-content-between align-items-center mb-3">
-    <h3>Minhas Tarefas</h3>
-    <div>
-      <a href="dashboard.php" class="btn btn-outline-secondary btn-sm">Dashboard</a>
-      <a href="logout.php" class="btn btn-outline-danger btn-sm">Sair</a>
+  <main class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center">
+      <h3>Minhas Tarefas</h3>
+      <div>
+        <a href="dashboard.php" class="btn btn-outline-secondary btn-sm">Dashboard</a>
+        <a href="logout.php" class="btn btn-outline-danger btn-sm">Sair</a>
+      </div>
     </div>
-  </div>
 
-  <!-- Form adicionar -->
-  <div class="card mb-3">
-    <div class="card-body">
-      <form action="add_tarefa.php" method="post" class="row g-2">
-        <div class="col-8">
-          <input type="text" name="titulo" class="form-control" placeholder="Nova tarefa..." required>
-        </div>
-        <div class="col-3">
-          <select name="status" class="form-control">
-            <option value="pendente">Pendente</option>
-            <option value="concluida">Concluída</option>
-          </select>
-        </div>
-        <div class="col-1">
-          <button class="btn btn-outline-secondary w-100" type="submit">Adicionar</button>
-        </div>
-      </form>
+    <div class="mt-3 mb-3">
+      <a href="add_tarefa.php" class="btn btn-outline-secondary">Nova Tarefa</a>
+      <!-- Filtros -->
+      <a href="tarefas.php?filter=all" class="btn btn-light btn-sm">Todas</a>
+      <a href="tarefas.php?filter=pendentes" class="btn btn-light btn-sm">Pendentes</a>
+      <a href="tarefas.php?filter=concluidas" class="btn btn-light btn-sm">Concluídas</a>
     </div>
-  </div>
 
-  <!-- Filtros -->
-  <div class="mb-3">
-    <a href="tarefas.php?filter=all" class="btn btn-sm btn-light">Todas</a>
-    <a href="tarefas.php?filter=pendentes" class="btn btn-sm btn-light">Pendentes</a>
-    <a href="tarefas.php?filter=concluidas" class="btn btn-sm btn-light">Concluídas</a>
-  </div>
-
-  <!-- Lista -->
-  <div class="table-responsive">
-    <table class="table table-striped">
-      <thead>
+    <table class="table mt-3">
+      <thead class="table-secondary">
         <tr>
+          <th>ID</th>
           <th>Título</th>
           <th>Status</th>
           <th>Criada</th>
@@ -72,27 +45,42 @@ $lista = $tarefa->listByUser($user_id, $filterParam);
         <?php if (!empty($lista)): ?>
           <?php foreach ($lista as $t): ?>
             <tr>
+              <td><?= $t->id ?></td>
               <td><?= htmlspecialchars($t->titulo) ?></td>
-              <td><?= htmlspecialchars($t->status) ?></td>
+              <td><?= ucfirst($t->status) ?></td>
               <td><?= date('d/m/Y H:i', strtotime($t->created_at)) ?></td>
-              <td>
-                <a href="edit_tarefa.php?id=<?= $t->id ?>" class="btn btn-sm btn-outline-secondary">Editar</a>
-                <form action="delete_tarefa.php" method="post" style="display:inline-block;">
+              <td class="d-flex gap-1">
+                <form action="edit_tarefa.php" method="get">
                   <input type="hidden" name="id" value="<?= $t->id ?>">
-                  <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Excluir tarefa?')">Excluir</button>
+                  <button class="btn btn-primary btn-sm" type="submit" title="Editar">
+                    <i class="bi bi-feather"></i>
+                  </button>
+                </form>
+
+                <form action="delete_tarefa.php" method="post">
+                  <input type="hidden" name="id" value="<?= $t->id ?>">
+                  <button class="btn btn-danger btn-sm" type="submit" title="Excluir"
+                    onclick="return confirm('Deseja deletar esta tarefa?');">
+                    <i class="bi bi-eraser-fill"></i>
+                  </button>
                 </form>
               </td>
             </tr>
           <?php endforeach; ?>
         <?php else: ?>
-          <tr><td colspan="4" class="text-center">Nenhuma tarefa encontrada.</td></tr>
+          <tr>
+            <td colspan="5" class="text-center">Nenhuma tarefa encontrada.</td>
+          </tr>
         <?php endif; ?>
       </tbody>
     </table>
-  </div>
-</main>
+  </main>
 
-<footer><?php require_once "_parts/_footer.php"; ?></footer>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+  <footer>
+    <?php require_once "_parts/_footer.php"; ?>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
