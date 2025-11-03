@@ -1,5 +1,5 @@
 <?php
-require_once "verifica_usuario.php";
+require_once "verificaUsuario.php";
 require_once __DIR__ . '/../database.php';
 
 if (session_status() === PHP_SESSION_NONE) {

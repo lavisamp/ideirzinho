@@ -5,14 +5,14 @@
     --font-texto: "Nimbus Mono, monospace";;
     --font-titulo:  "DM Serif Text", serif;
     --font-goma-: "Sour Gummy", sans-serif;
-    --cor-pessego:rgb(180, 91, 100);
+    --cor-pessego:rgb(47, 125, 128);
     --cor-branco:rgb(240, 240, 240);
-    --cor-rosaclaro: #ffc6c7;
-    --cor-letra-nobranco: #ac6879;
+    --cor-rosaclaro: #c6fff5;
+    --cor-letra-nobranco: rgb(35, 101, 104);
     --quase-branco: #ecdede;
     --preto:black;
     --clarinho:#e5d4d1;
-    --rosinha:#d39799;
+    --rosinha:#97d3cb;
     --corfont-marrom:#573a3a;
 
 }

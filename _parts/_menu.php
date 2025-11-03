@@ -43,19 +43,10 @@
     <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item px-2">
-          <a href="Home.php" class="nav-link">Ir para o site</a>
+          <a href="Tarefas.php" class="nav-link">Ir para a Agenda</a>
         </li>
         <li class="nav-item px-2">
-          <a href="Cliente.php" class="nav-link">Clientes</a>
-        </li>
-        <li class="nav-item px-2">
-          <a href="Empresa.php" class="nav-link">Empresa</a>
-        </li>
-        <li class="nav-item px-2">
-          <a href="Produto.php" class="nav-link">Produtos</a>
-        </li>
-        <li class="nav-item px-2">
-          <a href="Usuario.php" class="nav-link">Usuários</a>
+          <a href="cadastroUsuario.php" class="nav-link">Cadastro de Usuário</a>
         </li>
       </ul>
     </div>
