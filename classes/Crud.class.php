@@ -40,19 +40,22 @@ abstract class CRUD
         $stmt->bindParam(":id", $id, PDO::PARAM_INT);
         try {
             $stmt->execute();
-            return true; 
+            return true;
         } catch (PDOException $e) {
             error_log('Erro ao excluir registro' . $e->getMessage());
             return false;
         }
     }
-        public function iniciarTransacao(){
+    public function iniciarTransacao()
+    {
         $this->db->beginTransaction();
     }
-    public function confirmarTransacao(){
+    public function confirmarTransacao()
+    {
         $this->db->commit();
     }
-    public function cancelarTransacao(){
+    public function cancelarTransacao()
+    {
         $this->db->rollBack();
     }
 }

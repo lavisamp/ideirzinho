@@ -12,7 +12,6 @@
 
 <body>
     <header>
-        <?php require_once "_parts/_menu.php"; ?>
     </header>
     <main>
         <div class="container d-flex justify-content-center">

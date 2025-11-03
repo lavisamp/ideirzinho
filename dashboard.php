@@ -1,10 +1,3 @@
-<?php
-require_once "verifica_usuario.php";
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -20,20 +13,17 @@ if (session_status() === PHP_SESSION_NONE) {
 <body>
 
     <header>
-        <?php require_once "_parts/_menu.php"; 
-        require_once __DIR__ . '/../database.php';
-        ?>
     </header>
 
     <main class="container mt-4">
         <div class="profile-container">
-            <img src="images/pote.png" alt="Pote" class="profile-photo">
+            <img src="" alt="Pote" class="profile-photo">
 
             <div class="profile-info">
-                <p><strong>Usuário:</strong> <?php echo $_SESSION['nome']; ?></p>
-                <p><strong>E-mail:</strong> <?php echo $_SESSION['email']; ?></p>
+                <p><strong>Usuário:</strong>...</p>
+                <p><strong>E-mail:</strong>...</p>
 
-                <a href="Usuario.php" class="btn btn-outline-secondary">Editar Perfil</a>
+                <a href="usuario.php" class="btn btn-outline-secondary">Editar Perfil</a>
             </div>
         </div>
     </main>

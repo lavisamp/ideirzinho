@@ -1,21 +1,4 @@
 <?php
-require_once "verificaUsuario.php";
-require_once __DIR__ . '/../database.php';
-
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-spl_autoload_register(function ($class) {
-    require_once "classes/{$class}.class.php";
-});
-
-$user_id = $_SESSION['user_id'] ?? null;
-if (!$user_id) {
-    header('Location: login.php');
-    exit;
-}
-
 $tarefa = new Tarefa();
 
 // filtro via GET: all / concluidas / pendentes
