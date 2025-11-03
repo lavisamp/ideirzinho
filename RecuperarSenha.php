@@ -12,9 +12,6 @@
 </head>
 
 <body>
-<?php require_once "_parts/_menu2.php";
-require_once __DIR__ . '/../database.php';
-?>
 
     <main>
         <h1 class="text-center">Recuperar Senha</h1>
