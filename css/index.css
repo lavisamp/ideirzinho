@@ -1,0 +1,157 @@
+/* ======= Estilo Geral ======= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  body {
+    background: #f7f5ef;
+    color: #333;
+    line-height: 1.6;
+  }
+  
+  /* ======= Cabeçalho ======= */
+  header {
+    background: linear-gradient(135deg, #4a7c59, #86a873);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 20px 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+  
+  header img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 25px;
+    border: 3px solid #fff;
+  }
+  
+  header .empresa h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+  
+  header .empresa p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+  }
+  
+  /* ======= Seções ======= */
+  main {
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 0 20px;
+  }
+  
+  section {
+    background: #fff;
+    margin-bottom: 40px;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  section:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  }
+  
+  section h2 {
+    text-align: center;
+    color: #4a7c59;
+    font-weight: 600;
+    margin-bottom: 25px;
+    position: relative;
+  }
+  
+  section h2::after {
+    content: "";
+    width: 60px;
+    height: 3px;
+    background: #86a873;
+    display: block;
+    margin: 10px auto 0;
+    border-radius: 2px;
+  }
+  
+  .msn {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  
+  .msn img {
+    width: 80px;
+    height: 80px;
+    border-radius: 15px;
+    object-fit: contain;
+    background: #f0f0f0;
+    padding: 10px;
+  }
+  
+  .msn p, .msn ul {
+    flex: 1;
+    font-size: 1rem;
+  }
+  
+  /* ======= Listas ======= */
+  ul {
+    list-style: none;
+  }
+  
+  ul li {
+    background: #eaf3ea;
+    margin-bottom: 10px;
+    padding: 10px 15px;
+    border-left: 4px solid #4a7c59;
+    border-radius: 8px;
+    transition: background 0.3s;
+  }
+  
+  ul li:hover {
+    background: #dfeadf;
+  }
+  
+  /* ======= Rodapé ======= */
+  footer {
+    background: #4a7c59;
+    color: #fff;
+    text-align: center;
+    padding: 15px;
+    font-size: 0.95rem;
+    margin-top: 50px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+  }
+  
+  /* ======= Responsividade ======= */
+  @media (max-width: 768px) {
+    header {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    header img {
+      margin-bottom: 15px;
+    }
+  
+    .msn {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  
+    .msn img {
+      margin-bottom: 10px;
+    }
+  }
+  
