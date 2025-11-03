@@ -20,7 +20,7 @@ if (session_status() === PHP_SESSION_NONE) {
 <body>
 
     <header>
-        <?php require_once "_parts/_menu2.php"; 
+        <?php require_once "_parts/_menu.php"; 
         require_once __DIR__ . '/../database.php';
         ?>
     </header>
