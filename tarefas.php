@@ -12,7 +12,7 @@
 </head>
 
 <body>
-  <?php require_once "_parts/_menu2.php"; ?>
+  <?php require_once "_parts/_menu.php"; ?>
 
   <main class="container mt-4">
     <div class="d-flex justify-content-between align-items-center">
