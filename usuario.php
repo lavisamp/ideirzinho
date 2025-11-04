@@ -12,7 +12,9 @@
 </head>
 
 <header>
-
+<header>
+  <?php require_once "_parts/_menu.php"; ?>
+  </header>
 </header>
 
 <body>
