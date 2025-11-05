@@ -1,51 +1,52 @@
 <?php
-// Inclui a classe-pai CRUD, necessária para Tarefa
 require_once 'CRUD.class.php'; // ajuste o caminho conforme sua estrutura de pastas
+
 class Tarefa extends CRUD
 {
-    // Nome da tabela no banco
+    // Nome da tabela
     protected string $table = "tarefas";
 
-    // Propriedades da tarefa
-    private int $id;
-    private int $user_id;
+    // Propriedades
+    private ?int $id_tarefa = null;
+    private ?int $id_usuario = null;
     private string $titulo;
     private ?string $descricao = null;
-    private string $status;
+    private string $status = 'pendente';
 
-    // --- Getters e Setters ---
-    public function setUserId(int $user_id): void
+    // --- GETTERS e SETTERS ---
+    public function getIdTarefa(): ?int
     {
-        $this->user_id = $user_id;
+        return $this->id_tarefa;
+    }
+
+    public function setIdUsuario(?int $id_usuario): void
+    {
+        $this->id_usuario = $id_usuario;
     }
 
     public function setTitulo(string $titulo): void
     {
-        $this->titulo = $titulo;
+        $this->titulo = trim($titulo);
     }
 
     public function setDescricao(?string $descricao): void
     {
-        $this->descricao = $descricao;
+        $this->descricao = trim($descricao ?? '');
     }
 
     public function setStatus(string $status): void
     {
-        $this->status = $status;
+        $this->status = in_array($status, ['pendente', 'concluida']) ? $status : 'pendente';
     }
 
-    public function getId(): ?int
-    {
-        return $this->id ?? null;
-    }
-
-    // --- Adicionar tarefa ---
+    // --- INSERIR tarefa ---
     public function add(): bool
     {
-        $sql = "INSERT INTO {$this->table} (user_id, titulo, descricao, status) 
-                VALUES (:user_id, :titulo, :descricao, :status)";
+        $sql = "INSERT INTO {$this->table} (id_usuario, titulo, descricao, status)
+                VALUES (:id_usuario, :titulo, :descricao, :status)";
         $stmt = $this->db->prepare($sql);
-        $stmt->bindParam(':user_id', $this->user_id, PDO::PARAM_INT);
+
+        $stmt->bindParam(':id_usuario', $this->id_usuario, PDO::PARAM_INT);
         $stmt->bindParam(':titulo', $this->titulo, PDO::PARAM_STR);
         $stmt->bindParam(':descricao', $this->descricao, PDO::PARAM_STR);
         $stmt->bindParam(':status', $this->status, PDO::PARAM_STR);
@@ -53,13 +54,16 @@ class Tarefa extends CRUD
         return $stmt->execute();
     }
 
-    // --- Atualizar tarefa ---
+    // --- ATUALIZAR tarefa ---
     public function update(string $campo, int $id): bool
     {
         $sql = "UPDATE {$this->table}
-                SET titulo = :titulo, descricao = :descricao, status = :status
-                WHERE {$campo} = :id";
+                   SET titulo = :titulo,
+                       descricao = :descricao,
+                       status = :status
+                 WHERE {$campo} = :id";
         $stmt = $this->db->prepare($sql);
+
         $stmt->bindParam(':titulo', $this->titulo, PDO::PARAM_STR);
         $stmt->bindParam(':descricao', $this->descricao, PDO::PARAM_STR);
         $stmt->bindParam(':status', $this->status, PDO::PARAM_STR);
@@ -68,32 +72,41 @@ class Tarefa extends CRUD
         return $stmt->execute();
     }
 
-    // --- Listar tarefas por usuário ---
-    public function listByUser(int $user_id, ?string $filter = null): array
+    // --- DELETAR tarefa ---
+    public function delete(string $campo, int $id): bool
     {
-        $sql = "SELECT * FROM {$this->table} WHERE user_id = :user_id";
-        if ($filter === 'concluidas') {
-            $sql .= " AND status = 'concluida'";
-        } elseif ($filter === 'pendentes') {
-            $sql .= " AND status = 'pendente'";
-        }
-        $sql .= " ORDER BY created_at DESC";
-
-        $stmt = $this->db->prepare($sql);
-        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-        $stmt->execute();
-
-        return $stmt->fetchAll(PDO::FETCH_OBJ);
-    }
-
-    // --- Buscar tarefa por ID ---
-    public function searchById(int $id): ?object
-    {
-        $sql = "SELECT * FROM {$this->table} WHERE id = :id LIMIT 1";
+        $sql = "DELETE FROM {$this->table} WHERE {$campo} = :id";
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
+
+    // --- BUSCAR tarefa por campo (genérico) ---
+    public function search(string $campo, $valor): ?object
+    {
+        $sql = "SELECT * FROM {$this->table} WHERE {$campo} = :valor LIMIT 1";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':valor', $valor);
         $stmt->execute();
 
         return $stmt->rowCount() > 0 ? $stmt->fetch(PDO::FETCH_OBJ) : null;
+    }
+
+    // --- LISTAR tarefas por usuário ---
+    public function listByUser(int $id_usuario, ?string $filtro = null): array
+    {
+        $sql = "SELECT * FROM {$this->table} WHERE id_usuario = :id_usuario";
+        if ($filtro === 'concluidas') {
+            $sql .= " AND status = 'concluida'";
+        } elseif ($filtro === 'pendentes') {
+            $sql .= " AND status = 'pendente'";
+        }
+        $sql .= " ORDER BY data_criacao DESC";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':id_usuario', $id_usuario, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 }

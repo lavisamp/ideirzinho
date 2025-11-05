@@ -22,10 +22,10 @@
       require_once "classes/{$class}.class.php";
     });
 
-    if (filter_has_var(INPUT_POST, 'id')) {
-      $edtTarefa = new Usuario();
-      $idTarefa = intval(filter_input(INPUT_POST, 'id'));
-      $t = $edtTarefa->search('id', $idTarefa);
+    if (filter_has_var(INPUT_POST, 'idTarefa')) {
+      $edtTarefa = new Tarefa();
+      $idTarefa = intval(filter_input(INPUT_POST, 'idTarefa'));
+      $t = $edtTarefa->search('id_tarefa', $idTarefa);
     }
     ?>
 
