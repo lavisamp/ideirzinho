@@ -1,25 +1,3 @@
-<?php
-// tarefas.php
-session_start();
-
-spl_autoload_register(function ($class) {
-  require_once "classes/{$class}.class.php";
-});
-
-// Verifica login (ajuste conforme seu sistema)
-if (!isset($_SESSION['id_usuario'])) {
-  header('Location: login.php');
-  exit;
-}
-
-$idUsuario = $_SESSION['id_usuario'];
-$filtro = filter_input(INPUT_GET, 'filter', FILTER_SANITIZE_STRING);
-
-// Instancia e busca tarefas
-$tarefa = new Tarefa();
-$lista = $tarefa->listByUser($idUsuario, $filtro);
-?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
