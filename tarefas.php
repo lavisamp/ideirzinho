@@ -65,16 +65,16 @@ $lista = $tarefa->listByUser($idUsuario, $filtro);
       </thead>
       <tbody>
         <?php if (!empty($lista)): ?>
-          <?php foreach ($lista as $t): ?>
+          <?php foreach ($lista as $tf): ?>
             <tr>
               <td><?= $t->id_tarefa ?></td>
-              <td><?= htmlspecialchars($t->titulo) ?></td>
+              <td><?= htmlspecialchars($tf->titulo) ?></td>
               <td>
-                <span class="badge bg-<?= $t->status === 'concluida' ? 'success' : 'warning' ?>">
-                  <?= ucfirst($t->status) ?>
+                <span class="badge bg-<?= $tf->status === 'concluida' ? 'success' : 'warning' ?>">
+                  <?= ucfirst($tf->status) ?>
                 </span>
               </td>
-              <td><?= date('d/m/Y H:i', strtotime($t->data_criacao)) ?></td>
+              <td><?= date('d/m/Y H:i', strtotime($tf->data_criacao)) ?></td>
               <td class="d-flex gap-1">
                 <!-- Editar -->
                 <form action="cadastroTarefa.php" method="post" class="m-0">
