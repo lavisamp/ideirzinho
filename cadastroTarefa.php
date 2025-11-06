@@ -23,7 +23,7 @@
     spl_autoload_register(function ($class) {
       require_once "classes/{$class}.class.php";
     });
-    if (filter_has_var(INPUT_POST, "idTarefa")) {
+    if (filter_has_var(INPUT_POST, "idTarefa")) 
       $edtTarefa = new Tarefa();
       $idTarefa = intval(filter_input(INPUT_POST, "idTarefa"));
       $tf = $edtTarefa->search("id_tarefa", $idTarefa);
