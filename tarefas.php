@@ -12,7 +12,7 @@
 </head>
 
 <body>
-  <?php require_once "_parts/_menu2.php"; ?>
+  <?php require_once "_parts/_menu.php"; ?>
 
   <main class="container mt-4">
     <div class="d-flex justify-content-between align-items-center">
@@ -24,44 +24,50 @@
     </div>
 
     <div class="mt-3 mb-3">
-      <a href="add_tarefa.php" class="btn btn-outline-secondary">Nova Tarefa</a>
+      <a href="cadastroTarefa.php" class="btn btn-outline-secondary">Nova Tarefa</a>
       <!-- Filtros -->
       <a href="tarefas.php?filter=all" class="btn btn-light btn-sm">Todas</a>
       <a href="tarefas.php?filter=pendentes" class="btn btn-light btn-sm">Pendentes</a>
       <a href="tarefas.php?filter=concluidas" class="btn btn-light btn-sm">Concluídas</a>
     </div>
 
-    <table class="table mt-3">
+    <table class="table mt-3 table-hover align-middle">
       <thead class="table-secondary">
         <tr>
           <th>ID</th>
           <th>Título</th>
           <th>Status</th>
-          <th>Criada</th>
+          <th>Criada em</th>
           <th>Ações</th>
         </tr>
       </thead>
       <tbody>
         <?php if (!empty($lista)): ?>
-          <?php foreach ($lista as $t): ?>
+          <?php foreach ($lista as $tf): ?>
             <tr>
-              <td><?= $t->id ?></td>
-              <td><?= htmlspecialchars($t->titulo) ?></td>
-              <td><?= ucfirst($t->status) ?></td>
-              <td><?= date('d/m/Y H:i', strtotime($t->created_at)) ?></td>
+              <td><?= $t->id_tarefa ?></td>
+              <td><?= htmlspecialchars($tf->titulo) ?></td>
+              <td>
+                <span class="badge bg-<?= $tf->status === 'concluida' ? 'success' : 'warning' ?>">
+                  <?= ucfirst($tf->status) ?>
+                </span>
+              </td>
+              <td><?= date('d/m/Y H:i', strtotime($tf->data_criacao)) ?></td>
               <td class="d-flex gap-1">
-                <form action="edit_tarefa.php" method="get">
-                  <input type="hidden" name="id" value="<?= $t->id ?>">
+                <!-- Editar -->
+                <form action="cadastroTarefa.php" method="post" class="m-0">
+                  <input type="hidden" name="idTarefa" value="<?= $t->id_tarefa ?>">
                   <button class="btn btn-primary btn-sm" type="submit" title="Editar">
-                    <i class="bi bi-feather"></i>
+                    <i class="bi bi-pencil-square"></i>
                   </button>
                 </form>
 
-                <form action="delete_tarefa.php" method="post">
-                  <input type="hidden" name="id" value="<?= $t->id ?>">
-                  <button class="btn btn-danger btn-sm" type="submit" title="Excluir"
-                    onclick="return confirm('Deseja deletar esta tarefa?');">
-                    <i class="bi bi-eraser-fill"></i>
+                <!-- Excluir -->
+                <form action="bdTarefa.php" method="post" class="m-0">
+                  <input type="hidden" name="idTarefa" value="<?= $t->id_tarefa ?>">
+                  <button class="btn btn-danger btn-sm" type="submit" name="btnDeletar" title="Excluir"
+                    onclick="return confirm('Deseja realmente excluir esta tarefa?');">
+                    <i class="bi bi-trash3-fill"></i>
                   </button>
                 </form>
               </td>
@@ -69,7 +75,7 @@
           <?php endforeach; ?>
         <?php else: ?>
           <tr>
-            <td colspan="5" class="text-center">Nenhuma tarefa encontrada.</td>
+            <td colspan="5" class="text-center text-muted">Nenhuma tarefa encontrada.</td>
           </tr>
         <?php endif; ?>
       </tbody>

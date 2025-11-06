@@ -1,52 +1,68 @@
 <?php
-
 spl_autoload_register(function ($class) {
-    require_once "classes/{$class}.class.php";
+  require_once "classes/{$class}.class.php";
 });
-$Produto = new Tarefa();
 
-if (filter_has_var(INPUT_POST, "btnRegistrar")):
+$Tarefa = new Tarefa();
 
-    $idTarefa = filter_input(INPUT_POST, "idTarefa", FILTER_SANITIZE_NUMBER_INT);
+// --- SALVAR (INSERIR OU EDITAR) ---
+if (filter_has_var(INPUT_POST, "btnSalvar")):
 
-    $Produto->setTitulo(filter_input(INPUT_POST, "titulo", FILTER_SANITIZE_STRING));
-    $Produto->setdescricao(filter_input(INPUT_POST, "descricao", FILTER_SANITIZE_STRING));
-    $Produto->setStatus(filter_input(INPUT_POST, "status", FILTER_SANITIZE_STRING));
-    $Produto->setpromocao(filter_input(INPUT_POST, "promocao", FILTER_SANITIZE_STRING));
+  $idTarefa = filter_input(INPUT_POST, "idTarefa", FILTER_SANITIZE_NUMBER_INT);
+  $titulo = filter_input(INPUT_POST, "titulo", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+  $descricao = filter_input(INPUT_POST, "descricao", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+  $status = filter_input(INPUT_POST, "status", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-    if (empty($idProduto)):
-        if ($Produto->add()) {
-            echo "<script>
-                    window.alert('Produto adicionado com sucesso.');
-                    window.location.href = 'Produto.php';
-                  </script>";
-        } else {
-            echo "<script>
-                    window.alert('Erro ao adicionar Produto');
-                    window.history.back();
-                  </script>";
-        }
-    else:
-        if ($Produto->update('id_produto', $idProduto)) {
-            echo "<script>
-                    window.alert('Produto alterado com sucesso.');
-                    window.location.href = 'Produto.php';
-                  </script>";
-        } else {
-            echo "<script>
-                    window.alert('Erro ao alterar Produto.');
-                    window.history.back();
-                  </script>";
-        }
-    endif;
+  $Tarefa->setTitulo($titulo);
+  $Tarefa->setDescricao($descricao);
+  $Tarefa->setStatus($status);
 
-elseif (filter_has_var(INPUT_POST, 'btnDeletar')):
-    $idProduto = intval(filter_input(INPUT_POST, 'idProduto'));
-
-    if ($Produto->delete("id_produto", $idProduto)) {
-        header("Location: Produto.php");
+  // Se houver ID, atualiza; caso contrário, insere
+  if (empty($idTarefa)):
+    if ($Tarefa->add()) {
+      echo "<script>
+              alert('Tarefa cadastrada com sucesso!');
+              window.location.href = 'tarefas.php';
+            </script>";
     } else {
-        echo "<script>alert('Erro ao excluir produto.'); window.open(document.referrer, '_self');</script>";
+      echo "<script>
+              alert('Erro ao cadastrar tarefa.');
+              window.history.back();
+            </script>";
     }
+  else:
+    if ($Tarefa->update('id_tarefa', $idTarefa)) {
+      echo "<script>
+              alert('Tarefa alterada com sucesso!');
+              window.location.href = 'tarefas.php';
+            </script>";
+    } else {
+      echo "<script>
+              alert('Erro ao alterar tarefa.');
+              window.history.back();
+            </script>";
+    }
+  endif;
 
+  // --- DELETAR ---
+elseif (filter_has_var(INPUT_POST, "btnDeletar")):
+  $idTarefa = filter_input(INPUT_POST, "idTarefa", FILTER_SANITIZE_NUMBER_INT);
+
+  if ($Tarefa->delete("id_tarefa", $idTarefa)) {
+    echo "<script>
+            alert('Tarefa excluída com sucesso!');
+            window.location.href = 'tarefas.php';
+          </script>";
+  } else {
+    echo "<script>
+            alert('Erro ao excluir tarefa.');
+            window.history.back();
+          </script>";
+  }
+
+else:
+  echo "<script>
+          alert('Ação inválida.');
+          window.history.back();
+        </script>";
 endif;

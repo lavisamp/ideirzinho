@@ -28,6 +28,10 @@
       $idTarefa = intval(filter_input(INPUT_POST, "idTarefa"));
       $tf = $edtTarefa->search("id_tarefa", $idTarefa);
 
+    if (filter_has_var(INPUT_POST, 'idTarefa')) {
+      $edtTarefa = new Tarefa();
+      $idTarefa = intval(filter_input(INPUT_POST, 'idTarefa'));
+      $t = $edtTarefa->search('id_tarefa', $idTarefa);
     }
     ?>
     <form action="bdTarefa.php" method="post" class="row g-4 mt-3">
