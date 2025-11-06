@@ -6,7 +6,7 @@ spl_autoload_register(function ($class) {
 $Tarefa = new Tarefa();
 
 // --- SALVAR (INSERIR OU EDITAR) ---
-if (filter_has_var(INPUT_POST, "btnSalvar")):
+if (filter_has_var(INPUT_POST, "btnRegistrar")):
 
   $idTarefa = filter_input(INPUT_POST, "idTarefa", FILTER_SANITIZE_NUMBER_INT);
   $titulo = filter_input(INPUT_POST, "titulo", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -60,9 +60,4 @@ elseif (filter_has_var(INPUT_POST, "btnDeletar")):
           </script>";
   }
 
-else:
-  echo "<script>
-          alert('Ação inválida.');
-          window.history.back();
-        </script>";
 endif;

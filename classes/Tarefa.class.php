@@ -4,7 +4,7 @@ require_once 'CRUD.class.php'; // ajuste o caminho conforme sua estrutura de pas
 class Tarefa extends CRUD
 {
     // Nome da tabela
-    protected string $table = "tarefas";
+    protected $table = "tarefa";
 
     // Propriedades
     private ?int $id_tarefa = null;
@@ -42,11 +42,11 @@ class Tarefa extends CRUD
     // --- INSERIR tarefa ---
     public function add(): bool
     {
-        $sql = "INSERT INTO {$this->table} (id_usuario, titulo, descricao, status)
-                VALUES (:id_usuario, :titulo, :descricao, :status)";
+        $sql = "INSERT INTO {$this->table} (id_tarefa, titulo, descricao, status)
+                VALUES (:id_tarefa, :titulo, :descricao, :status)";
         $stmt = $this->db->prepare($sql);
 
-        $stmt->bindParam(':id_usuario', $this->id_usuario, PDO::PARAM_INT);
+        $stmt->bindParam(':id_tarefa', $this->id_tarefa, PDO::PARAM_INT);
         $stmt->bindParam(':titulo', $this->titulo, PDO::PARAM_STR);
         $stmt->bindParam(':descricao', $this->descricao, PDO::PARAM_STR);
         $stmt->bindParam(':status', $this->status, PDO::PARAM_STR);
@@ -81,32 +81,20 @@ class Tarefa extends CRUD
         return $stmt->execute();
     }
 
-    // --- BUSCAR tarefa por campo (genérico) ---
-    public function search(string $campo, $valor): ?object
-    {
-        $sql = "SELECT * FROM {$this->table} WHERE {$campo} = :valor LIMIT 1";
+    public function listAll(): array {
+        $sql = "SELECT * FROM {$this->table} ORDER BY data_criacao DESC";
         $stmt = $this->db->prepare($sql);
-        $stmt->bindParam(':valor', $valor);
         $stmt->execute();
-
-        return $stmt->rowCount() > 0 ? $stmt->fetch(PDO::FETCH_OBJ) : null;
-    }
-
-    // --- LISTAR tarefas por usuário ---
-    public function listByUser(int $id_usuario, ?string $filtro = null): array
-    {
-        $sql = "SELECT * FROM {$this->table} WHERE id_usuario = :id_usuario";
-        if ($filtro === 'concluidas') {
-            $sql .= " AND status = 'concluida'";
-        } elseif ($filtro === 'pendentes') {
-            $sql .= " AND status = 'pendente'";
-        }
-        $sql .= " ORDER BY data_criacao DESC";
-
-        $stmt = $this->db->prepare($sql);
-        $stmt->bindParam(':id_usuario', $id_usuario, PDO::PARAM_INT);
-        $stmt->execute();
-
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
+    
+    // LISTAR POR STATUS
+    public function listByStatus(string $status): array {
+        $sql = "SELECT * FROM {$this->table} WHERE status = :status ORDER BY data_criacao DESC";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':status', $status, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
 }

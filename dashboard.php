@@ -1,3 +1,18 @@
+<?php
+// dashboard.php
+
+session_start(); // ❗ Sempre no topo, antes de qualquer HTML
+
+// Verifica se o usuário está logado
+if (!isset($_SESSION['user_id'])) {
+    // Se não estiver logado, redireciona para a página de login
+    header("Location: login.php");
+    exit;
+}
+
+// Agora $_SESSION['nome'] e $_SESSION['email'] estão disponíveis
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -13,15 +28,16 @@
 <body>
 
     <header>
+        <?php require_once "_parts/_menu.php"; ?>
     </header>
 
     <main class="container mt-4">
         <div class="profile-container">
-            <img src="" alt="Pote" class="profile-photo">
+            <img src="images/ideir.jpeg" alt="" class="profile-photo">
 
             <div class="profile-info">
-                <p><strong>Usuário:</strong>...</p>
-                <p><strong>E-mail:</strong>...</p>
+                <p><strong>Usuário:</strong> <?php echo htmlspecialchars($_SESSION['nome']); ?></p>
+                <p><strong>E-mail:</strong> <?php echo htmlspecialchars($_SESSION['email']); ?></p>
 
                 <a href="usuario.php" class="btn btn-outline-secondary">Editar Perfil</a>
             </div>

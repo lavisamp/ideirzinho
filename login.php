@@ -18,7 +18,7 @@
         <div class="container d-flex justify-content-center">
             <div class="login-container">
                 <h3 class="text-center mb-4">Login</h3>
-                <form action="validar_login.php" method="POST">
+                <form action="validarLogin.php" method="POST">
                     <div class="mb-3">
                         <label for="usuario" class="form-label">Usuário</label>
                         <input type="text" class="form-control" id="usuario" name="usuario" required />

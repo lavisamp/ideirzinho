@@ -1,3 +1,27 @@
+<?php
+spl_autoload_register(function ($class) {
+  require_once "classes/{$class}.class.php";
+});
+
+$Tarefa = new Tarefa();
+
+// Captura filtro (se existir)
+$filter = filter_input(INPUT_GET, 'filter', FILTER_SANITIZE_STRING);
+
+// Monta consulta com filtro, se necessário
+switch ($filter) {
+  case 'pendentes':
+    $lista = $Tarefa->listByStatus('pendente');
+    break;
+  case 'concluidas':
+    $lista = $Tarefa->listByStatus('concluida');
+    break;
+  case 'all':
+  default:
+    $lista = $Tarefa->listAll();
+    break;
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -45,7 +69,7 @@
         <?php if (!empty($lista)): ?>
           <?php foreach ($lista as $tf): ?>
             <tr>
-              <td><?= $t->id_tarefa ?></td>
+              <td><?= $tf->id_tarefa ?></td>
               <td><?= htmlspecialchars($tf->titulo) ?></td>
               <td>
                 <span class="badge bg-<?= $tf->status === 'concluida' ? 'success' : 'warning' ?>">
@@ -56,7 +80,7 @@
               <td class="d-flex gap-1">
                 <!-- Editar -->
                 <form action="cadastroTarefa.php" method="post" class="m-0">
-                  <input type="hidden" name="idTarefa" value="<?= $t->id_tarefa ?>">
+                  <input type="hidden" name="idTarefa" value="<?= $tf->id_tarefa ?>">
                   <button class="btn btn-primary btn-sm" type="submit" title="Editar">
                     <i class="bi bi-pencil-square"></i>
                   </button>
@@ -64,7 +88,7 @@
 
                 <!-- Excluir -->
                 <form action="bdTarefa.php" method="post" class="m-0">
-                  <input type="hidden" name="idTarefa" value="<?= $t->id_tarefa ?>">
+                  <input type="hidden" name="idTarefa" value="<?= $tf->id_tarefa ?>">
                   <button class="btn btn-danger btn-sm" type="submit" name="btnDeletar" title="Excluir"
                     onclick="return confirm('Deseja realmente excluir esta tarefa?');">
                     <i class="bi bi-trash3-fill"></i>

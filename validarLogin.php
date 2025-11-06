@@ -1,8 +1,4 @@
 <?php
-// validar_login.php
-require_once __DIR__ . '/database.php';
-
-
 session_start();
 
 spl_autoload_register(function ($class) {
@@ -37,4 +33,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 }
 ?>
-
