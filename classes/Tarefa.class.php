@@ -1,6 +1,4 @@
 <?php
-// Inclui a classe-pai CRUD, necessária para Tarefa
-require_once 'CRUD.class.php'; // ajuste o caminho conforme sua estrutura de pastas
 class Tarefa extends CRUD
 {
     // Nome da tabela no banco
@@ -10,7 +8,7 @@ class Tarefa extends CRUD
     private int $id;
     private int $user_id;
     private string $titulo;
-    private ?string $descricao = null;
+    private ?string $descricao;
     private string $status;
 
     // --- Getters e Setters ---
