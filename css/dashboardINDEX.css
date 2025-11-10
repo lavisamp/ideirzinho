@@ -1,0 +1,81 @@
+@import url('base.css');
+
+/* Título */
+.titulo-dashboard {
+  font-family: var(--font-titulo);
+  color: var(--cor-pessego);
+  margin-top: 20px;
+  font-size: 2em;
+  text-shadow: 0 0 5px var(--clarinho);
+}
+
+/* Cards de informações */
+.card-info {
+  background-color: var(--cor-rosaclaro);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 0 6px var(--cor-pessego);
+  color: var(--cor-letra-nobranco);
+  transition: 0.3s ease;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.card-info:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 12px var(--clarinho);
+}
+
+.card-info h4 {
+  font-size: 1.1em;
+  margin-bottom: 8px;
+}
+
+.numero {
+  font-size: 2em;
+  color: var(--cor-pessego);
+  font-weight: bold;
+}
+
+.nome-fazenda {
+  font-size: 1.1em;
+  font-weight: 600;
+  color: var(--corfont-marrom);
+}
+
+/* Área do gráfico */
+.grafico-container {
+  background-color: var(--cor-branco);
+  border-radius: 30px;
+  box-shadow: 0 0 10px var(--clarinho);
+  padding: 25px;
+  margin: 25px auto;
+  width: 90%;
+}
+
+/* Corrige a cor do fundo geral */
+body, main {
+  background-color: var(--cor-branco) !important;
+}
+
+/* Ajusta o tamanho do canvas do gráfico */
+canvas {
+  width: 100% !important;
+  max-height: 350px;
+}
+
+/* Layout responsivo */
+@media screen and (max-width: 992px) {
+  .card-info {
+    margin-bottom: 15px;
+    width: 100%;
+  }
+
+  .numero {
+    font-size: 1.6em;
+  }
+
+  .titulo-dashboard {
+    font-size: 1.6em;
+  }
+}
