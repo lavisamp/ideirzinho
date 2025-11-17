@@ -31,8 +31,7 @@
                 </form>
 
                 <div class="senha-recupera">
-                    <a href="RecuperarSenha.php" class="btn btn-link"
-                        style="color: black; text-decoration: none;">Esqueceu senha?</a>
+                    <a href="RecuperarSenha.php" class="btn btn-outline-info">Esqueceu senha?</a>
                 </div>
 
             </div>

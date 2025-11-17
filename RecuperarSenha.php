@@ -12,7 +12,9 @@
 </head>
 
 <body>
-
+  <header>
+  <?php require_once "_parts/_menu.php"; ?>
+  </header>
     <main>
         <h1 class="text-center">Recuperar Senha</h1>
 
