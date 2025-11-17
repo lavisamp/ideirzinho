@@ -1,0 +1,65 @@
+card {
+    background-color: #fff;
+    border: 2px solid #c88a8a;
+    border-radius: 20px;
+    padding: 20px 30px;
+    box-shadow: 0 0 10px rgba(200, 138, 138, 0.4);
+    max-width: 600px;
+    margin: 20px auto;
+    font-family: 'Arial', sans-serif;
+    color: #a75a5a;
+}
+
+.card p {
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+}
+
+.card .label {
+    font-weight: 700;
+    color: #a75a5a;
+}
+
+.user-data-box {
+    border: 1px solid #b55;
+    border-radius: 10px;
+    padding: 15px;
+    width: 400px;
+    min-height: 150px;
+    color: #b55;
+}
+
+main {
+    min-height: 1vh;
+    /* ocupa a tela inteira */
+    display: flex;
+    justify-content: center;
+    /* centraliza horizontalmente */
+    align-items: center;
+    /* centraliza verticalmente */
+}
+
+.profile-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Caixa de informações */
+.profile-info {
+    flex: 1;
+    font-family: var(--font-texto);
+    color: var(--corfont-marrom);
+}
+
+/* Responsivo: em telas pequenas volta a empilhar */
+@media (max-width: 768px) {
+    .profile-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .profile-info {
+        margin-top: 15px;
+    }
+}

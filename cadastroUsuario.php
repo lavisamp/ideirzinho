@@ -30,7 +30,7 @@
     }
     ?>
 
-    <form action="bdCadastroDeUsuario.php" method="post" class="row g-3 mt-3">
+    <form action="bdCadastrodeUsuario.php" method="post" class="row g-3 mt-3">
       <input type="hidden" name="IdUsuario" value="<?= $us->id_usuario ?? '' ?>">
 
       <div class="col-12">

@@ -33,13 +33,14 @@ if (!isset($_SESSION['user_id'])) {
 
     <main class="container mt-4">
         <div class="profile-container">
-            <img src="images/ideir.jpeg" alt="" class="profile-photo">
+            <img src="" alt="" class="profile-photo">
 
             <div class="profile-info">
                 <p><strong>Usuário:</strong> <?php echo htmlspecialchars($_SESSION['nome']); ?></p>
                 <p><strong>E-mail:</strong> <?php echo htmlspecialchars($_SESSION['email']); ?></p>
 
                 <a href="usuario.php" class="btn btn-outline-secondary">Editar Perfil</a>
+                <a href="logout.php" class="btn btn-outline-danger">Sair</a>
             </div>
         </div>
     </main>

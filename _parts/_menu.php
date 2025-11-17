@@ -46,9 +46,6 @@
           <a href="dashboardINDEX.php" class="nav-link">Avaliações Gerais</a>
         </li>
         <li class="nav-item px-2">
-          <a href="Tarefas.php" class="nav-link">Ir para a Agenda</a>
-        </li>
-        <li class="nav-item px-2">
           <a href="cadastroUsuario.php" class="nav-link">Cadastro de Usuário</a>
         </li>
         <li class="nav-item px-2">
